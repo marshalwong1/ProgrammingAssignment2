@@ -5,15 +5,15 @@
 ## makeCacheMatrix is an "object" (actually a list)
 ## that has the following four methods:
 ## $set(y)        Sets the value of the stored matrix to the matrix passed as a parameter 
-## $get           Gets the value of the stored matrix
-## $setInverse(inverse)   Sets the value of the inverse of the matrix
-## $getInverse            Gets the value of the inverse of the matrix
+## $get()           Gets the value of the stored matrix
+## $setInverse(inverse)   Sets the value of the inverse of the matrix to the passed parameter
+## $getInverse()            Gets the value of the inverse of the matrix
 
 makeCacheMatrix <- function(x = matrix()) {
   
       inv <- NULL  ## sets the inital inverse to NULL
 
-      # $set - stores the matrix passed to this function in the object
+      # $set(y) - stores the matrix passed to this function in the object
       set <- function(y) {
         ## checks that y is a matrix and if so, sets x = y
         if (is.matrix(y)) {
@@ -24,13 +24,13 @@ makeCacheMatrix <- function(x = matrix()) {
         inv <<- NULL
       }
       
-      # $get - returns the stored matrix
+      # $get() - returns the stored matrix
       get <- function() x
       
-      # $setInverse - takes a matrix and stores it as the "inverse"
+      # $setInverse(inverse) - takes a matrix and stores it as the "inverse"
       setInverse <- function(inverse) inv <<- inverse
       
-      # $getInverse - returns the stored inverse
+      # $getInverse() - returns the stored inverse
       getInverse <- function() inv
       
       list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
@@ -39,7 +39,7 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## cacheSolve takes a makeCacheMatrix object and
 ## calculates its inverse, storing the result in
-## the makeCacheMatrix
+## the makeCacheMatrix object using $setInverse(inverse)
 ## Assumes that the matrix is invertible
 
 cacheSolve <- function(x, ...) {
